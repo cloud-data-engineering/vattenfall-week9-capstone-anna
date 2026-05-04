@@ -1,0 +1,17 @@
+project:
+  name: vattenfall_week9_capstone
+  company_theme: vattenfall
+  business_theme: energy_operations_and_market_intelligence
+  description: Governed Databricks lakehouse for energy operations and market intelligence.
+
+unity_catalog:
+  catalog: vattenfall_dev
+
+schemas:
+  raw: raw
+  refined: refined
+  analytics: analytics
+
+volumes:
+  landing: landing
+  checkpoints: checkpoints
