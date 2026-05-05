@@ -9,3 +9,8 @@ checkpoint_paths:
   weather: weather_checkpoint
   grid_events: grid_events_checkpoint
   reference: reference_checkpoint
+
+schema_tracking_paths:
+  market_prices: market_prices_schema
+  weather: weather_schema
+  grid_events: grid_events_schema
