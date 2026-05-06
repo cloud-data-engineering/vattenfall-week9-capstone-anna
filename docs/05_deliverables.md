@@ -2,7 +2,7 @@
 
 This document tracks the daily deliverables completed during the Vattenfall Week 9 Capstone project.
 
-## Day 1 — Repository foundation
+## Day 1 - Repository foundation
 
 By the end of Day 1, the repository should contain a clear engineering foundation for the capstone project.
 
@@ -50,7 +50,7 @@ Validated Bronze tables:
 
 The Day 1 foundation prepared the project for the Day 2 Bronze ingestion implementation.
 
-## Day 2 — Bronze implementation
+## Day 2 - Bronze implementation
 
 By the end of Day 2, the repository and Databricks workspace should contain a working multi-source Bronze ingestion layer.
 
@@ -158,3 +158,180 @@ The Bronze layer should preserve raw source boundaries, keep ingestion traceabil
 ### Day 2 result
 
 The Day 2 Bronze layer is working, validated, documented, committed, and ready to support Day 3 Silver cleaning and standardization.
+
+## Day 3 - Silver layer engineering
+
+By the end of Day 3, the project should contain cleaned, standardized, validated, and reusable Silver datasets built from the Day 2 Bronze layer.
+
+### Required deliverables
+
+The expected Day 3 deliverables are:
+
+- Silver notebooks completed
+- reusable transformation code in `src/transforms/`
+- reusable validation helpers in `src/validation/`
+- at least one meaningful UDF in `src/udfs/`
+- `sys.path.append(...)` used to import project modules
+- `df.transform()` used in the Silver transformation flow
+- Silver Delta tables created
+- integrated Silver base table created
+- Silver validation outputs
+- updated SQL validation scripts
+- committed and pushed project work
+
+### Source Bronze tables
+
+The Day 3 Silver layer uses the following Bronze tables as inputs:
+
+- `vattenfall_dev.raw.bronze_market_prices`
+- `vattenfall_dev.raw.bronze_weather`
+- `vattenfall_dev.raw.bronze_grid_events`
+- `vattenfall_dev.raw.bronze_asset_reference`
+
+### Silver outputs
+
+The Day 3 implementation created the following Silver tables:
+
+- `vattenfall_dev.refined.silver_market_prices`
+- `vattenfall_dev.refined.silver_weather`
+- `vattenfall_dev.refined.silver_grid_events`
+- `vattenfall_dev.refined.silver_asset_reference`
+- `vattenfall_dev.refined.silver_regional_operations_base`
+
+### Transformation modules
+
+Reusable transformation logic was added under `src/transforms/`:
+
+- `market_price_transforms.py`
+- `weather_transforms.py`
+- `grid_event_transforms.py`
+- `integration_transforms.py`
+
+These modules keep the notebooks cleaner and make the transformation logic easier to reuse, test, and explain.
+
+### UDF usage
+
+A meaningful UDF was added in:
+
+- `src/udfs/grid_udfs.py`
+
+The UDF creates a `severity_band` field for grid events, grouping operational severity values into reusable categories such as `ELEVATED`, `WATCH`, and `NORMAL`.
+
+### Silver transformation logic
+
+The Silver notebooks use `df.transform()` to apply reusable transformations in a clear pipeline style.
+
+Example transformation flow:
+
+```text
+read Bronze
+↓
+standardize columns
+↓
+cast fields
+↓
+add derived day fields
+↓
+filter invalid records
+↓
+write Silver Delta table
+↓
+validate output
+```
+
+### Domain-specific Silver work
+
+Market prices Silver:
+
+- standardized `region`
+- standardized `market_type`
+- cast `price_eur_mwh`
+- cast `volume_mwh`
+- created `report_day`
+- filtered invalid price and volume records
+
+Weather Silver:
+
+- standardized `region`
+- standardized `weather_alert_level`
+- cast `temperature_c`
+- cast `wind_speed_kmh`
+- cast `precipitation_mm`
+- created `report_day`
+- filtered invalid weather records
+
+Grid events Silver:
+
+- standardized `region`
+- standardized `event_type`
+- standardized `severity`
+- cast `duration_minutes`
+- created `event_timestamp` from the actual Bronze `event_date` field
+- created `event_day`
+- added `severity_band` using a UDF
+- filtered invalid event records
+
+Asset reference Silver:
+
+- standardized `asset_id`
+- standardized `region`
+- standardized `asset_type`
+- removed duplicate asset records
+- prepared a clean reference table for later joins
+
+### Integrated Silver base
+
+The integrated Silver output combines:
+
+- cleaned grid events
+- cleaned asset reference data
+- cleaned weather context
+
+Target table:
+
+- `vattenfall_dev.refined.silver_regional_operations_base`
+
+This table prepares the project for Day 4 business logic and Gold outputs.
+
+### Silver validation
+
+The Silver validation notebook checks:
+
+- table existence
+- row counts
+- schema visibility
+- key null values
+- invalid values
+- domain values
+- sample rows for inspection
+
+Validation notebook:
+
+- `notebooks/03_silver/06_silver_validation`
+
+SQL validation files:
+
+- `sql/04_day3_silver_validation.sql`
+- `sql/05_day3_integrated_silver_inspection.sql`
+- `sql/06_day3_null_and_invalid_checks.sql`
+
+### Completion criteria
+
+Day 3 is complete when:
+
+- all required Silver tables exist
+- all Silver tables contain rows
+- reusable `src/` modules are used
+- `df.transform()` is used meaningfully
+- at least one UDF is used meaningfully
+- validation checks pass
+- SQL validation scripts are available
+- the integrated Silver base is ready for Day 4
+
+### Engineering standard
+
+The Silver layer should not be a simple copy of Bronze. It should add clear engineering value by cleaning, standardizing, validating, and preparing reusable datasets for business logic and Gold outputs.
+
+### Day 3 result
+
+The Day 3 Silver layer is working, validated, documented, committed, and ready to support Day 4 testing, logging, business logic, and Gold reporting outputs.
