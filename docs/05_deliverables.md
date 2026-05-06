@@ -335,3 +335,190 @@ The Silver layer should not be a simple copy of Bronze. It should add clear engi
 ### Day 3 result
 
 The Day 3 Silver layer is working, validated, documented, committed, and ready to support Day 4 testing, logging, business logic, and Gold reporting outputs.
+
+## Day 4 — Gold, governance, testing, and dashboard delivery
+
+By the end of Day 4, the project should turn the cleaned Silver layer into tested, governed, business-facing Gold outputs and dashboard-ready reporting structures.
+
+### Required deliverables
+
+The expected Day 4 deliverables are:
+
+- Silver validation before Gold creation
+- logging and run summary notebooks
+- reusable Gold helper modules
+- business logic notebooks
+- Gold Delta tables
+- Gold validation checks
+- analyst-facing Gold views
+- dashboard documentation
+- governance notes and Catalog Explorer inspection
+- SQL validation and governance scripts
+- committed and pushed project work
+
+### Silver foundation validation
+
+Before creating Gold outputs, the Silver layer was validated for:
+
+- table existence
+- row counts
+- key null values
+- invalid values
+- join readiness
+
+Validation notebook:
+
+- `notebooks/04_testing_logging/01_silver_testing_and_validation`
+
+### Logging and observability
+
+Day 4 added reusable logging helpers in:
+
+- `src/utils/logging_utils.py`
+
+The logging pattern prints:
+
+- source tables
+- target tables
+- row counts
+- business logic summaries
+- governance placement
+
+Logging notebook:
+
+- `notebooks/04_testing_logging/02_logging_and_run_summaries`
+
+### Business logic
+
+Day 4 prepared business indicators for market, weather, and grid operations.
+
+Business logic notebooks:
+
+- `notebooks/05_business_logic/01_business_logic_market_weather`
+- `notebooks/05_business_logic/02_business_logic_grid_operations`
+
+Reusable helper modules:
+
+- `src/metrics/business_metrics.py`
+- `src/transforms/gold_aggregations.py`
+- `src/validation/gold_checks.py`
+
+Business indicators include:
+
+- high market price flag
+- weather risk signal
+- grid incident severity summaries
+- operational status
+- operational attention flag
+
+### Gold outputs
+
+The Day 4 implementation created the following Gold tables in the analytics schema:
+
+- `vattenfall_dev.analytics.gold_daily_market_summary`
+- `vattenfall_dev.analytics.gold_weather_impact_summary`
+- `vattenfall_dev.analytics.gold_grid_incident_summary`
+- `vattenfall_dev.analytics.gold_regional_operations_dashboard`
+
+### Gold table purpose
+
+Daily market summary:
+
+- grain: one row per report day and region
+- purpose: daily regional market price and volume overview
+
+Weather impact summary:
+
+- grain: one row per report day and region
+- purpose: daily regional weather condition and alert context
+
+Grid incident summary:
+
+- grain: one row per event day, region, and severity band
+- purpose: operational incident burden and severity reporting
+
+Regional operations dashboard:
+
+- grain: one row per report day and region
+- purpose: dashboard-ready combined market, weather, and grid operations view
+
+### Gold views
+
+Day 4 created analyst-facing views in the analytics schema:
+
+- `vattenfall_dev.analytics.vw_regional_operations_dashboard`
+- `vattenfall_dev.analytics.vw_daily_incident_trends`
+- `vattenfall_dev.analytics.vw_market_weather_overview`
+
+Views notebook:
+
+- `notebooks/07_governance/01_gold_views_and_catalog_inspection`
+
+### Dashboard documentation
+
+Dashboard documentation was added under:
+
+- `dashboards/dashboard_requirements.md`
+- `dashboards/dashboard_storyboard.md`
+
+Output and presentation documentation was added under:
+
+- `outputs/expected_gold_outputs.md`
+- `outputs/presentation_talking_points.md`
+
+### Gold validation
+
+Gold validation checks include:
+
+- row counts
+- duplicate grain checks
+- key null checks
+- KPI sanity checks
+- sample output inspection
+
+Validation notebook:
+
+- `notebooks/06_gold/05_gold_validation`
+
+SQL validation files:
+
+- `sql/07_day4_gold_validation.sql`
+- `sql/08_day4_gold_views.sql`
+- `sql/09_day4_governance_inspection.sql`
+
+### Governance model
+
+The project uses Unity Catalog as the governed delivery frame:
+
+- `raw`: Bronze ingestion and source-preserving tables
+- `refined`: cleaned and reusable Silver tables
+- `analytics`: business-facing Gold tables and reporting views
+
+Governance notebook:
+
+- `notebooks/07_governance/02_governance_notes_and_permissions_limitations`
+
+In Databricks Free Edition, some permission commands may be limited. The project therefore demonstrates governance through catalog, schema, table, view, and volume organization, plus Catalog Explorer inspection.
+
+### Completion criteria
+
+Day 4 is complete when:
+
+- Silver validation passes before Gold creation
+- Gold tables exist and contain rows
+- Gold tables have clear business grain
+- Gold views are created
+- dashboard-ready output is available
+- Gold validation checks are visible
+- Unity Catalog organization is documented
+- governance limitations are explained
+- SQL validation scripts are available
+- the implementation is committed and pushed
+
+### Engineering standard
+
+The Gold layer should not expose raw technical noise. It should provide curated, business-facing, dashboard-ready outputs with clear grain, useful KPIs, validation evidence, and governance awareness.
+
+### Day 4 result
+
+The Day 4 delivery layer is working, validated, documented, committed, and ready for Day 5 optimization, debugging, and final presentation preparation.
