@@ -15,7 +15,7 @@ def cast_grid_event_fields(df: DataFrame) -> DataFrame:
     return (
         df
         .withColumn("duration_minutes", F.col("duration_minutes").cast("int"))
-        .withColumn("event_timestamp", F.to_timestamp("event_ts"))
+        .withColumn("event_timestamp", F.to_timestamp("event_date"))
     )
 
 
