@@ -336,7 +336,7 @@ The Silver layer should not be a simple copy of Bronze. It should add clear engi
 
 The Day 3 Silver layer is working, validated, documented, committed, and ready to support Day 4 testing, logging, business logic, and Gold reporting outputs.
 
-## Day 4 — Gold, governance, testing, and dashboard delivery
+## Day 4 - Gold, governance, testing, and dashboard delivery
 
 By the end of Day 4, the project should turn the cleaned Silver layer into tested, governed, business-facing Gold outputs and dashboard-ready reporting structures.
 
