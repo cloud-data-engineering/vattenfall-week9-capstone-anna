@@ -522,3 +522,172 @@ The Gold layer should not expose raw technical noise. It should provide curated,
 ### Day 4 result
 
 The Day 4 delivery layer is working, validated, documented, committed, and ready for Day 5 optimization, debugging, and final presentation preparation.
+
+## Day 4 Night Shift - Advanced delivery layer
+
+The Day 4 Night Shift extends the normal Day 4 Gold delivery layer with advanced trust, risk, observability, and executive reporting outputs.
+
+This extension does not replace the normal Day 4 work. It adds a second advanced delivery layer on top of the existing Silver and Gold outputs.
+
+### Purpose
+
+The Night Shift extension makes the capstone more:
+
+- trustworthy
+- analytical
+- explainable
+- presentation-ready
+- executive-facing
+
+### Advanced Gold outputs
+
+The Night Shift creates these additional Gold tables in `vattenfall_dev.analytics`:
+
+- `gold_data_trust_audit`
+- `gold_asset_incident_intelligence`
+- `gold_weather_grid_risk_correlation`
+- `gold_market_operations_stress`
+- `gold_pipeline_observability_summary`
+- `gold_executive_energy_risk_dashboard_base`
+
+### Executive view
+
+The extension creates one executive-facing view:
+
+- `vw_executive_energy_risk_dashboard`
+
+This view combines advanced market, weather, grid, and asset risk signals into a simplified executive risk output.
+
+### Advanced trust audit
+
+The trust audit output stores validation evidence as a Gold table instead of only printing checks in notebooks.
+
+It checks:
+
+- null key dimensions
+- duplicate grains
+- invalid values
+- missing asset reference matches
+- reporting readiness
+
+Output:
+
+- `gold_data_trust_audit`
+
+### Asset incident intelligence
+
+The asset intelligence output summarizes incidents at asset level.
+
+It includes:
+
+- total incident count
+- elevated incident count
+- critical incident count
+- total duration
+- average duration
+- last incident day
+- asset risk category
+
+Output:
+
+- `gold_asset_incident_intelligence`
+
+### Weather-grid risk correlation
+
+The weather-grid output aligns weather and grid incident signals at day-region grain.
+
+It includes:
+
+- weather risk category
+- grid risk category
+- incident count
+- elevated incident count
+- total duration
+- weather-grid risk score
+
+Output:
+
+- `gold_weather_grid_risk_correlation`
+
+This output shows aligned risk signals. It does not prove causality.
+
+### Market-operations stress
+
+The market-operations stress output combines market pressure and operational incident pressure.
+
+It includes:
+
+- market pressure flag
+- operations stress flag
+- combined stress label
+- incident counts
+- market price and volume context
+
+Output:
+
+- `gold_market_operations_stress`
+
+### Pipeline observability
+
+The observability output stores structured run evidence for the Night Shift notebooks.
+
+It includes:
+
+- notebook name
+- source table
+- target table
+- rows read
+- rows written
+- validation status
+- execution timestamp
+- comments
+
+Output:
+
+- `gold_pipeline_observability_summary`
+
+### Final validation
+
+The final Night Shift validation checks:
+
+- all advanced Gold tables exist
+- the executive view returns rows
+- row counts are greater than zero
+- key dimensions are not null
+- duplicate grain checks pass
+- trust audit contains records
+- observability summary contains records
+
+Validation notebook:
+
+- `notebooks/04_night_shift/07_night_shift_final_validation`
+
+### SQL files
+
+Night Shift SQL files:
+
+- `sql/10_night_shift_gold_outputs.sql`
+- `sql/11_night_shift_validation.sql`
+- `sql/12_night_shift_views.sql`
+- `sql/13_night_shift_governance_inspection.sql`
+
+### Documentation
+
+Night Shift documentation:
+
+- `docs/09_day4_night_shift_scope.md`
+- `docs/10_day4_night_shift_outputs.md`
+- `docs/11_day4_night_shift_governance_notes.md`
+- `outputs/night_shift_expected_outputs.md`
+- `outputs/night_shift_presentation_notes.md`
+- `dashboards/executive_energy_risk_dashboard.md`
+
+### Governance
+
+Night Shift outputs live in the `analytics` schema because they are business-facing, validated, and intended for reporting or executive interpretation.
+
+In Databricks Free Edition, some permission commands may be limited. Governance is therefore demonstrated through Unity Catalog organization, Catalog Explorer inspection, table/view placement, and documentation.
+
+### Result
+
+The Night Shift extension adds a senior-style assurance and risk intelligence layer on top of the normal Day 4 Gold delivery layer.
