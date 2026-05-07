@@ -1,0 +1,21 @@
+catalog: vattenfall_dev
+
+schemas:
+  refined: refined
+  analytics: analytics
+
+night_shift_tables:
+  data_trust_audit: gold_data_trust_audit
+  asset_incident_intelligence: gold_asset_incident_intelligence
+  weather_grid_risk_correlation: gold_weather_grid_risk_correlation
+  market_operations_stress: gold_market_operations_stress
+  pipeline_observability_summary: gold_pipeline_observability_summary
+
+night_shift_views:
+  executive_risk_dashboard: vw_executive_energy_risk_dashboard
+
+risk_rules:
+  high_market_price_threshold: 75
+  elevated_incident_count_threshold: 3
+  long_total_duration_threshold: 120
+  high_wind_speed_threshold: 30
