@@ -55,3 +55,53 @@ The Day 5 performance review uses `explain(True)` on:
 ## Targeted improvement principle
 
 The project does not optimize blindly. It first identifies risks, then applies targeted improvements that make the pipeline cleaner, easier to debug, and easier to explain.
+
+## Optimization improvements applied
+
+### OPT-001 - Reduce repeated actions
+
+Original pattern: repeated `.count()` calls on the same DataFrame.
+
+Improved pattern: store count results in variables and reuse them.
+
+Why it helps: avoids repeated Spark jobs for the same DataFrame.
+
+Applied to: validation and inventory notebooks.
+
+### OPT-002 - Prune columns before joins
+
+Original pattern: joining wide DataFrames with unnecessary or duplicate columns.
+
+Improved pattern: select only business-relevant columns before joining.
+
+Why it helps: reduces schema width, avoids ambiguous columns, and makes joins easier to debug.
+
+Applied to: integrated Silver logic, Gold dashboard logic, and executive risk dashboard logic.
+
+### OPT-003 - Use stable sources for persistent views
+
+Original pattern: creating a persistent Unity Catalog view from a temporary view.
+
+Improved pattern: write a managed Delta base table first, then create the view from that table.
+
+Why it helps: the view remains reusable and is not tied to the notebook session.
+
+Applied to: `vw_executive_energy_risk_dashboard`.
+
+### OPT-004 - Validate immediately after writes
+
+Original pattern: output tables are written and validated only later.
+
+Improved pattern: validate row counts, key nulls, duplicate grains, and sample outputs immediately after important writes.
+
+Why it helps: errors are easier to locate and explain.
+
+Applied to: Silver, Gold, and Night Shift outputs.
+
+### OPT-005 - Add explicit logging
+
+Original pattern: notebooks rely on implicit outputs.
+
+Improved pattern: print source table, target table, grain, row count, and business logic summaries.
+
+Why it helps: notebook runs are easier to inspect, debug, and present.
