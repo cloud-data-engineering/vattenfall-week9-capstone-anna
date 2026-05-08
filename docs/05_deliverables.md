@@ -691,3 +691,163 @@ In Databricks Free Edition, some permission commands may be limited. Governance 
 ### Result
 
 The Night Shift extension adds a senior-style assurance and risk intelligence layer on top of the normal Day 4 Gold delivery layer.
+
+## Day 5  Performance optimization, debugging, and presentation readiness
+
+Day 5 is the final technical hardening day of the capstone.
+
+It does not create a new pipeline layer. Instead, it reviews the completed project, identifies performance and maintainability risks, documents debugging scenarios, applies targeted improvements, validates final outputs, and prepares the project for presentation.
+
+### Required deliverables
+
+The expected Day 5 deliverables are:
+
+- full pipeline review
+- final table and view inventory
+- performance issue scan
+- at least two `explain(True)` inspections
+- at least five identified performance or maintainability risks
+- at least three documented optimization improvements
+- at least three documented debugging scenarios
+- final validation results
+- presentation readiness notes
+- committed and pushed project work
+
+### Full pipeline review
+
+Day 5 reviews the final project inventory across:
+
+- Bronze tables
+- Silver tables
+- Gold tables
+- Night Shift advanced outputs
+- analyst-facing views
+- executive-facing views
+
+Notebook:
+
+- `notebooks/08_optimization_debugging/01_full_pipeline_review`
+
+Output documentation:
+
+- `outputs/final_table_catalog.md`
+
+### Performance review
+
+The performance review identifies risks such as:
+
+- repeated `.count()` actions
+- wide joins
+- ambiguous columns after joins
+- display overload
+- late validation
+
+It also includes `explain(True)` inspections on important DataFrames.
+
+Notebook:
+
+- `notebooks/08_optimization_debugging/02_performance_review`
+
+Output documentation:
+
+- `outputs/optimization_summary.md`
+
+### Debugging scenarios
+
+Day 5 documents debugging scenarios for:
+
+- path issues
+- schema mismatch
+- Python module caching in Databricks
+- duplicate or ambiguous join columns
+- Unity Catalog persistent view limitations
+
+Notebook:
+
+- `notebooks/08_optimization_debugging/03_debugging_scenarios`
+
+Output documentation:
+
+- `outputs/debugging_summary.md`
+
+### Optimization improvements
+
+Day 5 documents and demonstrates targeted improvements such as:
+
+- storing row counts in variables to reduce repeated actions
+- pruning columns before joins
+- creating persistent views from stable managed tables
+- validating outputs immediately after writes
+- adding explicit logging for source tables, target tables, row counts, and grains
+
+Notebook:
+
+- `notebooks/08_optimization_debugging/04_optimization_improvements`
+
+### Final validation
+
+Final validation checks:
+
+- table and view availability
+- row counts
+- key null dimensions
+- duplicate reporting grains
+- metric sanity checks
+- dashboard-ready views
+- executive risk dashboard view
+
+Notebook:
+
+- `notebooks/08_optimization_debugging/05_final_validation`
+
+Output documentation:
+
+- `outputs/final_validation_summary.md`
+
+### Presentation readiness
+
+Day 5 prepares the final capstone story for presentation.
+
+It summarizes:
+
+- business context
+- architecture
+- Bronze ingestion
+- Silver transformation
+- Gold delivery
+- Night Shift extension
+- testing and logging
+- Unity Catalog governance
+- debugging work
+- optimization decisions
+- final business value
+
+Notebook:
+
+- `notebooks/08_optimization_debugging/06_presentation_readiness`
+
+Presentation files:
+
+- `outputs/presentation_summary.md`
+- `presentation/presentation_outline.md`
+- `presentation/speaking_points.md`
+
+### Final project state
+
+The final project includes:
+
+- a governed Bronze layer in `vattenfall_dev.raw`
+- a cleaned Silver layer in `vattenfall_dev.refined`
+- business-facing Gold outputs in `vattenfall_dev.analytics`
+- Night Shift advanced risk and trust outputs
+- analyst-facing and executive-facing views
+- validation evidence
+- debugging notes
+- optimization notes
+- presentation-ready documentation
+
+### Engineering standard
+
+Day 5 moves the project from implemented to presentation-ready.
+
+The final capstone should be understandable, debuggable, validated, governed, optimized where reasonable, and ready to explain.
